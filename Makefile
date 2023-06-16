@@ -1,8 +1,10 @@
 .PHONY: build clean publish
 
 # Variables
-DOCKER_BUILD_COMMAND=DOCKER_BUILDKIT=1 docker buildx build --platform linux/amd64
-DOCKER_IMAGE_NAME=switchboard-function
+CARGO_NAME=switchboard-function # Cargo.toml name
+DOCKER_IMAGE_NAME=switchboard-function # Docker registry image name (Ex: switchboardlabs/my-function)
+
+DOCKER_BUILD_COMMAND=DOCKER_BUILDKIT=1 docker buildx build --platform linux/amd64 --build-arg CARGO_NAME=${CARGO_NAME}
 
 # Default make task
 all: build
