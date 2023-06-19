@@ -13,6 +13,17 @@
   </p>
 </div>
 
+## Switchboard Functions
+
+Switchboards V3 architecture allows users to permissionlessly build and run any code you like and we attest the output is from your code.
+
+## Table of Content
+
+- [Project Setup](#setup)
+- [Examples](#examples)
+  - [Binance](#binance)
+  - [Secrets](#secrets)
+
 ## Setup
 
 Edit the Makefile with your docker image name. Make sure to include your docker
@@ -47,3 +58,13 @@ To get started, you will first need to:
 Next, you will need to create a Function account for your given MRENCLAVE
 measurement. Head over to [app.switchboard.xyz](https://app.switchboard.xyz) and
 create a new function with your given repository and MRENCLAVE measurement.
+
+## Examples
+
+### Binance
+
+An example function to pull in many spot prices from Binance.
+
+### Secrets
+
+An example function that uses Switchboard Secrets.
