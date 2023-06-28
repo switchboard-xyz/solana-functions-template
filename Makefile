@@ -1,4 +1,4 @@
-.PHONY: build clean publish
+.PHONY: build clean publish test
 
 # Variables
 CARGO_NAME=switchboard-function # Cargo.toml name
@@ -15,6 +15,8 @@ docker_publish:
 	${DOCKER_BUILD_COMMAND} -t ${DOCKER_IMAGE_NAME} --push .
 
 build: docker_build measurement
+
+test:
 
 publish: docker_publish measurement
 
