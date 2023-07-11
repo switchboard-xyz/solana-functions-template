@@ -15,7 +15,8 @@
 
 ## Switchboard Functions
 
-Switchboards V3 architecture allows users to permissionlessly build and run any code you like and we attest the output is from your code.
+Switchboards V3 architecture allows users to permissionlessly build and run any
+code you like and we attest the output is from your code.
 
 ## Table of Content
 
@@ -59,6 +60,27 @@ Next, you will need to create a Function account for your given MRENCLAVE
 measurement. Head over to [app.switchboard.xyz](https://app.switchboard.xyz) and
 create a new function with your given repository and MRENCLAVE measurement.
 
+Alternatively, create a function with the Switchboard CLI:
+
+```bash
+npm i --global @switchboard-xyz/cli
+
+sbv2 solana function create CkvizjVnm2zA5Wuwan34NhVT3zFc7vqUyGnA6tuEF5aE \
+  --name "My Function" \
+  --metadata "Basic binance oracle with TWAP" \
+  --fundAmount 0.25 \
+  --schedule "30 * * * * *" \
+  --container switchboardlabs/basic-oracle-function \
+  --containerRegistry docker \
+  --version solana \
+  --keypair ~/.config/id/solana.json
+
+# or fund an existing function
+sbv2 solana function fund $MY_FUNCTION_PUBKEY \
+  --fundAmount 0.25 \
+  --keypair ~/.config/id/solana.json
+```
+
 ## Examples
 
 ### Binance
@@ -68,3 +90,8 @@ An example function to pull in many spot prices from Binance.
 ### Secrets
 
 An example function that uses Switchboard Secrets.
+
+## More Info
+
+See [docs.switchboard.xyz](https://docs.switchboard.xyz/guides/solana/functions)
+to get started.
