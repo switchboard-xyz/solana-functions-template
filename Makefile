@@ -2,7 +2,7 @@
 
 # Variables
 CARGO_NAME=switchboard-function # Cargo.toml name
-DOCKER_IMAGE_NAME=switchboard-function # Docker registry image name (Ex: switchboardlabs/my-function)
+DOCKER_IMAGE_NAME=switchboardlabs/my-function # Docker registry image name
 
 DOCKER_BUILD_COMMAND=DOCKER_BUILDKIT=1 docker buildx build --platform linux/amd64 --build-arg CARGO_NAME=${CARGO_NAME}
 
@@ -10,13 +10,11 @@ DOCKER_BUILD_COMMAND=DOCKER_BUILDKIT=1 docker buildx build --platform linux/amd6
 all: build
 
 docker_build: 
-	${DOCKER_BUILD_COMMAND} -t ${DOCKER_IMAGE_NAME} --load .
+	${DOCKER_BUILD_COMMAND} --pull -f Dockerfile -t ${DOCKER_IMAGE_NAME} --load ./
 docker_publish: 
-	${DOCKER_BUILD_COMMAND} -t ${DOCKER_IMAGE_NAME} --push .
+	${DOCKER_BUILD_COMMAND} --pull -f Dockerfile -t ${DOCKER_IMAGE_NAME} --push ./
 
 build: docker_build measurement
-
-test:
 
 publish: docker_publish measurement
 
