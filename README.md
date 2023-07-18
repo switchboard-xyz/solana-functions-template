@@ -21,9 +21,10 @@ code you like and we attest the output is from your code.
 ## Table of Content
 
 - [Project Setup](#setup)
-- [Examples](#examples)
-  - [Binance](#binance)
-  - [Secrets](#secrets)
+- [Examples](./examples/README.md)
+  - [Binance](./examples/binance/binance.rs)
+  - [Randomness](./examples/randomness/randomness.rs)
+  - [Secrets](./examples/secrets/README.md)
 
 ## Setup
 
@@ -78,16 +79,6 @@ sbv2 solana function fund $MY_FUNCTION_PUBKEY \
   --fundAmount 0.25 \
   --keypair ~/.config/id/solana.json
 ```
-
-## Examples
-
-### Binance
-
-An example function to pull in many spot prices from Binance.
-
-### Secrets
-
-An example function that uses Switchboard Secrets.
 
 ## More Info
 
