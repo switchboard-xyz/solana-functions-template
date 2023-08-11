@@ -9,7 +9,7 @@ COPY ./Cargo.lock ./Cargo.toml  ./
 COPY ./src ./src
 
 RUN --mount=type=cache,target=/usr/local/cargo/registry,id=${TARGETPLATFORM} \
-    --mount=type=cache,target=/home/root/switchboard-function/target,id=${TARGETPLATFORM} \
+    --mount=type=cache,target=target,id=${TARGETPLATFORM} \
     cargo build --release && \
     cargo strip && \
     mv target/release/${CARGO_NAME} /sgx/app
@@ -20,6 +20,8 @@ FROM switchboardlabs/sgx-function
 COPY --from=builder /sgx/app /sgx
 
 # Get the measurement from the enclave
-RUN /get_measurement.sh
+RUN rm -f /measurement.txt && \
+    /get_measurement.sh && \
+    cat /measurement.txt
 
 ENTRYPOINT ["/bin/bash", "/boot.sh"]

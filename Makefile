@@ -19,10 +19,11 @@ build: docker_build measurement
 publish: docker_publish measurement
 
 measurement:
-	@docker run -d --name my-switchboard-function $(DOCKER_IMAGE_NAME) > /dev/null
+	@docker run -d --platform=linux/amd64 --pull always -q --name=my-switchboard-function ${DOCKER_IMAGE_NAME}:latest > /dev/null
 	@docker cp my-switchboard-function:/measurement.txt measurement.txt
 	@docker stop my-switchboard-function > /dev/null
 	@docker rm my-switchboard-function > /dev/null
+	@echo MrEnclave: $(shell cat ./measurement.txt)
 
 # Task to clean up the compiled rust application
 clean:
