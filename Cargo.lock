@@ -1402,6 +1402,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "envy"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3f47e0157f2cb54f5ae1bd371b30a2ae4311e1c028f575cd4e81de7353215965"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "equivalent"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4493,12 +4502,15 @@ checksum = "ab16ced94dbd8a46c82fd81e3ed9a8727dac2977ea869d217bcc4ea1f122e81f"
 
 [[package]]
 name = "switchboard-common"
-version = "0.8.5"
+version = "0.8.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c5a03303674fb73b1dbe6cfc83aa8faa0e99264472a47177a1803f7475b318d1"
+checksum = "723a9a346c6d6eb3374ebe8ea3848e61d40d1f9f46635604137e19a1a4262c52"
 dependencies = [
+ "envy",
  "getrandom 0.2.10",
  "hex",
+ "rand 0.8.5",
+ "reqwest",
  "serde",
  "serde_json",
  "sgx-quote",
@@ -4517,9 +4529,9 @@ dependencies = [
 
 [[package]]
 name = "switchboard-solana"
-version = "0.9.5"
+version = "0.28.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3f5bea97fd6f8e8ce6872148000df6aaba5a45597f4342b95b1fef498aaf2566"
+checksum = "be7519b529ee2dbaf8deb3161e64c4cc4396d3028bf97cff10ced53ee48c33b4"
 dependencies = [
  "anchor-client",
  "anchor-lang",
@@ -4537,6 +4549,7 @@ dependencies = [
  "superslice",
  "switchboard-common",
  "tokio",
+ "url",
 ]
 
 [[package]]
