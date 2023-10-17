@@ -6,13 +6,13 @@
 
 # Variables
 CARGO_NAME=switchboard-function # Cargo.toml name
-DOCKERHUB_IMAGE_NAME=switchboardlabs/my-function # Docker registry image name
+DOCKER_IMAGE_NAME=switchboardlabs/my-function # Docker registry image name
 
 check_docker_env:
-ifeq ($(strip $(DOCKERHUB_IMAGE_NAME)),)
-	$(error DOCKERHUB_IMAGE_NAME is not set)
+ifeq ($(strip $(DOCKER_IMAGE_NAME)),)
+	$(error DOCKER_IMAGE_NAME is not set)
 else
-	@echo DOCKERHUB_IMAGE_NAME: ${DOCKERHUB_IMAGE_NAME}
+	@echo DOCKER_IMAGE_NAME: ${DOCKER_IMAGE_NAME}
 endif
 
 DOCKER_BUILD_COMMAND=DOCKER_BUILDKIT=1 docker buildx build --platform linux/amd64 --build-arg CARGO_NAME=${CARGO_NAME}
@@ -21,16 +21,16 @@ DOCKER_BUILD_COMMAND=DOCKER_BUILDKIT=1 docker buildx build --platform linux/amd6
 all: build
 
 docker_build: check_docker_env
-	${DOCKER_BUILD_COMMAND} --pull -f Dockerfile -t ${DOCKERHUB_IMAGE_NAME} --load ./
+	${DOCKER_BUILD_COMMAND} --pull -f Dockerfile -t ${DOCKER_IMAGE_NAME} --load ./
 docker_publish: check_docker_env
-	${DOCKER_BUILD_COMMAND} --pull -f Dockerfile -t ${DOCKERHUB_IMAGE_NAME} --push ./
+	${DOCKER_BUILD_COMMAND} --pull -f Dockerfile -t ${DOCKER_IMAGE_NAME} --push ./
 
 build: docker_build measurement
 
 publish: docker_publish measurement
 
 measurement: check_docker_env
-	@docker run -d --platform=linux/amd64 -q --name=my-switchboard-function ${DOCKERHUB_IMAGE_NAME}:latest
+	@docker run -d --platform=linux/amd64 -q --name=my-switchboard-function ${DOCKER_IMAGE_NAME}:latest
 	@docker cp my-switchboard-function:/measurement.txt ./measurement.txt
 	@echo -n 'MrEnclve: '
 	@cat measurement.txt
